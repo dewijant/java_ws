@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<marek:person xmlns:marek="http://www.marek.com/schemas"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.marek.com/schemas marek.xsd"
+      type="mujTyp"> 
+      
+    <firstName>Marek</firstName>
+    <lastName>Wija</lastName>
+    <age>33</age>
+    <datum>2008-09-14</datum>
+    
+    <!-- auto MAX occurs 2 in schema -->
+    <marek:auto>
+    	<znacka>Skoda</znacka>
+    	<marek:motor>NAFTA</marek:motor>
+    	<objem pocet_valcu="4">NAFTA</objem>
+    	<vyroba>2008-09-14</vyroba>
+    	<pneumatiky>Hankook</pneumatiky>
+    	<kola>15</kola>
+    </marek:auto>
+    
+    <marek:auto>
+    	<znacka>Skoda</znacka>
+    	<marek:motor>BENZIN</marek:motor>
+    	<objem pocet_valcu="4">BENZIN</objem>
+    	<vyroba>2008-09-14</vyroba>
+    	<kola>17</kola>
+    	<hagusy></hagusy> <!-- Zde defaultni hodnota FALSE -->
+    </marek:auto>
+    
+    <!-- elementy nemusi dodrzet poradi -->
+    <marek:notebook>
+    	<procesor>Intel</procesor>
+    	<znacka>Lenovo</znacka>
+    	<disk>500 GB</disk>
+    </marek:notebook>
+    
+    <note>
+    	<to>TO</to>
+    	<from>FROM</from>
+    	<heading>HEAD</heading>
+    	<body>BODY</body>
+    </note>
+    
+    
+</marek:person>

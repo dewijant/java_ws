@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<xs:schema 
+    version="1.0" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="unqualified"
+    xmlns:marek="http://www.marek.com/schemas"
+    targetNamespace="http://www.marek.com/schemas"
+    attributeFormDefault="unqualified">
+
+    <xs:element name="person" type="marek:Person" abstract="false" />
+    <xs:element name="auto" type="marek:Auto" />
+    <xs:element name="notebook" type="marek:Notebook" />
+    <!-- Muzu vytvorit element zde a pak se na nej odkazat, nebo pouzit rovnou typ, je jedno
+    kde si vytvorim referncni element.
+    Na typy se pak mohou odkazovat i jine elementy, neni vazan pouze v jednom elementu 
+    
+    -->
+    
+    
+    
+    
+	<xs:complexType name="Person">
+		<xs:sequence>
+			<xs:element name="firstName" type="xs:string" nillable="false" />
+			<xs:element name="lastName" type="xs:string" nillable="false" />
+			<xs:element name="age">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="18"></xs:minInclusive>
+						<xs:maxInclusive value="111"></xs:maxInclusive>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="datum" type="xs:date" nillable="true" minOccurs="0" />
+			<xs:element ref="marek:auto" maxOccurs="2" />
+			<xs:element ref="marek:notebook" />
+			<xs:element name="note">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="to" type="xs:string" />
+						<xs:element name="from" type="xs:string" />
+						<xs:element name="heading" type="xs:string" />
+						<xs:element name="body" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string" use="optional" default="ordinary" />
+	</xs:complexType>
+    
+    <xs:complexType name="Auto">
+    	<xs:sequence> <!-- zalezi na poradi -->
+    		<xs:element name="znacka" type="xs:string" />
+    		<xs:element ref="marek:motor" />
+    		<xs:element name="objem" type="marek:ObjemValce" />
+            <xs:element name="vyroba" type="xs:date" />
+            <!-- Alespon jeden z teto mnoziny musi byt pritomen, maximalne 2 -->
+            <xs:choice minOccurs="1" maxOccurs="2">
+            	<xs:element name="kola" type="xs:int" />
+            	<xs:element name="pneumatiky" type="xs:string"/>
+            	<xs:element name="hagusy" type="xs:boolean" default="false" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Notebook">
+    	<xs:all> <!-- nezalezi na poradi, max occurs je 1 a min occurs je 0 -->
+    		<xs:element name="znacka" type="xs:string" />
+    		<xs:element name="procesor" type="xs:string" />
+            <xs:element name="disk" type="xs:string" />
+        </xs:all>
+    </xs:complexType>
+
+	<xs:simpleType name="Motor">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NAFTA" />
+			<xs:enumeration value="BENZIN" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<xs:element name="motor" type="marek:Motor" />
+	
+	<!-- Vytvoril jsem novy element, rozsiril jsem muj existujici a doplnil mu atribut s omezenim  -->
+	<xs:complexType name="ObjemValce">
+		<xs:simpleContent>
+			<xs:extension base="marek:Motor">
+				<xs:attribute name="pocet_valcu" type="xs:int" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	
+
+
+	
+	
+	
+    
+  
+    
+
+</xs:schema>
