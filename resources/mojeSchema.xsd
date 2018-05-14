@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/mojeSchema"
+	xmlns:moje="http://www.example.org/mojeSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+	<element name="prvni" type="string" />
+	
+</schema>
