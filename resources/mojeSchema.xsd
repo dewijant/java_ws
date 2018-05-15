@@ -1,7 +1,80 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/mojeSchema"
-	xmlns:moje="http://www.example.org/mojeSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+        version="1.0"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://www.idea.com/schemas"
+        targetNamespace="http://www.idea.com/schemas"
+        attributeFormDefault="unqualified">
 
-	<element name="prvni" type="string" />
-	
-</schema>
+    <xs:element name="dum" type="Dum" />
+    <xs:element name="pokus" type="xs:int" />
+
+    <!-- 	Komplexni elementy
+    There are four kinds of complex elements:
+
+    - empty elements
+    - elements that contain only other elements
+    - elements that contain only text
+    - elements that contain both other elements and text
+    Note: Each of these elements may contain attributes as well!
+
+     -->
+
+    <xs:complexType name="Dum">
+        <xs:sequence>
+            <xs:element name="cena" type="CenaMena" />
+            <xs:element name="velikost" type="xs:int" />
+            <xs:element name="typ" type="Typ" />
+            <xs:element name="strecha" type="StrechaSolar" />
+        </xs:sequence>
+        <xs:attribute name="klic" type="xs:boolean" use="required" />
+    </xs:complexType>
+
+
+
+    <xs:complexType name="CenaMena">
+        <xs:simpleContent>
+            <xs:extension base="xs:int">
+                <xs:attribute name="mena" type="xs:string" default="Česká koruna" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:simpleType name="Typ">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="drevostavba" />
+            <xs:enumeration value="cihlova" />
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="StrechaSolar">
+        <xs:simpleContent>
+            <xs:extension base="Strecha">
+                <xs:attribute name="solar" type="xs:boolean"  default="false"/>
+            </xs:extension>
+        </xs:simpleContent>
+</xs:complexType>
+    
+    <xs:simpleType name="Strecha">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sedlova" />
+            <xs:enumeration value="rovna" />
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="Adresa">
+    	<xs:restriction base="xs:string">
+    		<!--
+    			- preserve - NEBUDE MAZAT ZADNE MEZERY
+    			- replace - nahradi vsechny bile znaky mezerou
+    			- collapse - vsechno bile smaze, vice mezer prevede na jednu mezeru
+    		-->
+    		<xs:whiteSpace value="collapse"></xs:whiteSpace>
+    	</xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>

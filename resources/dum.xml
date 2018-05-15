@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<idea:dum xmlns:idea="http://www.idea.com/schemas"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.idea.com/schemas mojeSchema.xsd"
+          klic="true">
+
+    <cena mena="Euro">100000</cena>
+    <velikost>140</velikost>
+    <typ>drevostavba</typ>
+    <strecha solar="true">sedlova</strecha>
+
+
+
+</idea:dum>
