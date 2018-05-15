@@ -7,7 +7,14 @@
     <cena mena="Euro">100000</cena>
     <velikost>140</velikost>
     <typ>drevostavba</typ>
-    <strecha solar="true">sedlova</strecha>
+    <strecha solar="true" pocetPanelu="5">sedlova</strecha>
+    <zahrada>1200</zahrada>
+    <site>
+        <voda>true</voda>
+        <plyn>true</plyn>
+        <elektrina>true</elektrina>
+        <!--<kanalizace>true</kanalizace>-->
+    </site>
 
 
 

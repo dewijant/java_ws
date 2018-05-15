@@ -6,7 +6,7 @@
         targetNamespace="http://www.idea.com/schemas"
         attributeFormDefault="unqualified">
 
-    <xs:element name="dum" type="Dum" />
+    <xs:element name="dum" type="DumZahrada" />
     <xs:element name="pokus" type="xs:int" />
 
     <!-- 	Komplexni elementy
@@ -20,14 +20,34 @@
 
      -->
 
-    <xs:complexType name="Dum">
+    <xs:complexType name="Dum" abstract="true">
         <xs:sequence>
             <xs:element name="cena" type="CenaMena" />
             <xs:element name="velikost" type="xs:int" />
             <xs:element name="typ" type="Typ" />
-            <xs:element name="strecha" type="StrechaSolar" />
+            <xs:element name="strecha" type="StrechaSolarPanel" />
         </xs:sequence>
         <xs:attribute name="klic" type="xs:boolean" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="DumZahrada">
+        <xs:complexContent>
+            <xs:extension base="Dum">
+                <xs:sequence>
+                    <xs:element name="zahrada" type="xs:int" />
+                    <xs:element name="site" type="InzenyrskeSite" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="InzenyrskeSite">
+        <xs:all minOccurs="0">
+            <xs:element name="voda" type="xs:boolean"/>
+            <xs:element name="plyn" type="xs:boolean" />
+            <xs:element name="elektrina" type="xs:boolean" />
+            <xs:element name="kanalizace" type="xs:boolean" minOccurs="0" />
+        </xs:all>
     </xs:complexType>
 
 
@@ -48,13 +68,21 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:complexType name="StrechaSolarPanel">
+    	<xs:complexContent>
+    		<xs:extension base="StrechaSolar">
+                <xs:attribute name="pocetPanelu" type="xs:int" />
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+    
     <xs:complexType name="StrechaSolar">
         <xs:simpleContent>
             <xs:extension base="Strecha">
                 <xs:attribute name="solar" type="xs:boolean"  default="false"/>
             </xs:extension>
         </xs:simpleContent>
-</xs:complexType>
+	</xs:complexType>
     
     <xs:simpleType name="Strecha">
         <xs:restriction base="xs:string">
